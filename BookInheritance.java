@@ -9,16 +9,12 @@ class Book {
         this.yearPublished = yearPublished;
     }
 
-    public String getTitle() {
-        return title;
+    public String getBookInfo() {
+        return "Title: " + title + "\nAuthor: " + author + "\nYear Published: " + yearPublished;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public int getYearPublished() {
-        return yearPublished;
+    public void printBookDetails() {
+        System.out.println(getBookInfo());
     }
 }
 
@@ -32,14 +28,24 @@ class PrintedBook extends Book {
         this.publisher = publisher;
     }
 
+    @Override
+    public String getBookInfo() {
+        return super.getBookInfo() + "\nPublisher: " + publisher + "\nNumber of Pages: " + numberOfPages;
+    }
+
+    @Override
     public void printBookDetails() {
         System.out.println("Printed Book Info:");
-        System.out.println("Title: " + getTitle());
-        System.out.println("Author: " + getAuthor());
-        System.out.println("Year Published: " + getYearPublished());
-        System.out.println("Publisher: " + publisher);
-        System.out.println("Number of Pages: " + numberOfPages);
+        System.out.println(getBookInfo());
         System.out.println("Book Type: PrintedBook\n");
+    }
+
+    public void bookType() {
+        System.out.println("This is a printed book");
+    }
+
+    public void printBook() {
+        System.out.println("Printing the book...");
     }
 }
 
@@ -53,23 +59,34 @@ class EBook extends Book {
         this.fileFormat = fileFormat;
     }
 
+    @Override
+    public String getBookInfo() {
+        return super.getBookInfo() + "\nFile Size: " + fileSizeMB + " MB\nFile Format: " + fileFormat;
+    }
+
+    @Override
     public void printBookDetails() {
         System.out.println("EBook Info:");
-        System.out.println("Title: " + getTitle());
-        System.out.println("Author: " + getAuthor());
-        System.out.println("Year Published: " + getYearPublished());
-        System.out.println("File Size: " + fileSizeMB + " MB");
-        System.out.println("File Format: " + fileFormat);
+        System.out.println(getBookInfo());
         System.out.println("Book Type: EBook\n");
+    }
+
+    public void bookType() {
+        System.out.println("This is an ebook");
     }
 }
 
-public class BookInheritance {
+class Main {
     public static void main(String[] args) {
         PrintedBook printedBook = new PrintedBook("Fight Club", "Chuck Palahniuk", 1996, 256, "AST");
         EBook eBook = new EBook("Castle", "Franz Kafka", 1922, 3.9, "PDF");
 
         printedBook.printBookDetails();
+        printedBook.bookType();
+        printedBook.printBook();
+        System.out.println();
+
         eBook.printBookDetails();
+        eBook.bookType();
     }
 }
